@@ -13,6 +13,7 @@ jobs:
     env:
       GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
       GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+      IMAGE_NAME: java-app
 
     steps:
       - name: Checkout code
@@ -84,7 +85,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-         docker build -t ghcr.io/${{ github.repository }}/java-app:${{ github.sha }} .
+         docker build -t ghcr.io/${{ github.repository }}/${IMAGE_NAME}:${{ github.sha }} .
 
       - name: Push Docker image to GHCR
-        run: docker push ghcr.io/${{ github.repository }}/java-app:${{ github.sha }}
+        run: docker push ghcr.io/${{ github.repository }}/${IMAGE_NAME}:${{ github.sha }}
